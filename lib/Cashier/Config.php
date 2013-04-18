@@ -13,8 +13,6 @@ class Config
                     'cache_dir' => './tmp',
                   );
 
-
-
   public static function set($key, $value = NULL)
   {
     static::$bag[$key] = $value;

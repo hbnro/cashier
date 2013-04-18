@@ -7,8 +7,6 @@ class Memcache
 
   private static $res = NULL;
 
-
-
   public function free_all()
   {
     memcache_flush(cache::link());
@@ -53,15 +51,16 @@ class Memcache
         }
       }
     }
+
     return FALSE;
   }
 
-
   private static function link()
   {
-    if ( ! static::$res) { // TODO: allow configuration
+    if (! static::$res) { // TODO: allow configuration
       static::$res = memcache_connect('localhost', '11211');
     }
+
     return static::$res;
   }
 

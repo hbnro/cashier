@@ -16,14 +16,13 @@ class Base
                     'filesystem' => '\\Cashier\\Driver\\Filesystem',
                   );
 
-
-
   public static function begin($key = NULL)
   {
     $key = $key ?: '__LEVEL' . ob_get_level();
 
     if (static::exists($key)) {
       echo static::fetch($key);
+
       return FALSE;
     }
 
@@ -50,6 +49,7 @@ class Base
     if ($max > 0) {
       return static::store($key, $out, $max, $tags);
     }
+
     return TRUE;
   }
 
@@ -71,6 +71,7 @@ class Base
     if (($old = static::instance()->fetch_item($key)) === FALSE) {
       return $default;
     }
+
     return $old;
   }
 
@@ -106,7 +107,6 @@ class Base
       $key = array_filter(explode(',', $key));
     }
 
-
     if (is_array($key)) {
       $old = static::instance()->fetch_item('__CACHE_TAGS');
 
@@ -121,8 +121,10 @@ class Base
 
         unset($old[$i]);
       }
+
       return static::instance()->store_item('__CACHE_TAGS', $old, 1234567890);
     }
+
     return static::instance()->delete_item($key);
   }
 
@@ -136,14 +138,13 @@ class Base
     return static::instance()->check_item($key);
   }
 
-
   private static function instance()
   {
-    if ( ! static::$obj) {
+    if (! static::$obj) {
       $aux = \Cashier\Config::get('driver');
 
       if ( ! isset(static::$available[$aux])) {
-        throw new \Exception("The cache driver '$aux' does not exists.");
+        throw new \Exception("The cache driver '$aux' does not exists");
       }
 
       $klass = static::$available[$aux];

@@ -26,6 +26,7 @@ class PHP
       }
       @unlink($cache_file);
     }
+
     return FALSE;
   }
 
@@ -54,4 +55,3 @@ class PHP
   }
 
 }
-

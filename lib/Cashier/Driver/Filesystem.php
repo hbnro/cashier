@@ -31,6 +31,7 @@ class Filesystem
         return unserialize($new);
       }
     }
+
     return FALSE;
   }
 

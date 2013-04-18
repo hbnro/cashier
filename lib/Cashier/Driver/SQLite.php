@@ -7,8 +7,6 @@ class SQLite
 
   private static $obj = NULL;
 
-
-
   public function free_all()
   {
     static::instance()->exec('DELETE FROM "data"');
@@ -29,6 +27,7 @@ class SQLite
       }
       static::delete_item($key);
     }
+
     return FALSE;
   }
 
@@ -67,10 +66,9 @@ class SQLite
     return @array_shift($tmp->fetchArray(SQLITE3_NUM)) > 0;
   }
 
-
   private static function instance()
   {
-    if ( ! static::$obj) {
+    if (! static::$obj) {
       $db_file = \Cashier\Config::get('cache_dir').DIRECTORY_SEPARATOR.'__CACHE_DB';
 
       if ( ! is_file($db_file)) {
@@ -89,7 +87,6 @@ class SQLite
       }
 
       static::$obj = new \SQLite3($db_file);
-
 
       $time = time();
 
